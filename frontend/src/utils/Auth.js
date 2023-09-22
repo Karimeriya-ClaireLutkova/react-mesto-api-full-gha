@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.pract.mesto.students.ru';
+export const BASE_URL = 'https://api.pract.mesto.students.nomoredomainsrocks.ru';
 const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
 }
