@@ -1,0 +1,9 @@
+.popup__button_close_form-grow {
+  transform: translate(40px, -8px);
+}
+
+@media (max-width: 800px) {
+  .popup__button_close_form-grow {
+    transform: translate(0);
+  }
+}

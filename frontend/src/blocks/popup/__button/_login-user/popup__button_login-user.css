@@ -1,0 +1,12 @@
+.popup__button_login-user {
+  background-color: #FFF;
+  border-radius: 2px;
+  color:black;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 181px 0 84px;
+}
+
+.popup__button_login-user:hover {
+  opacity: 0.85;
+}

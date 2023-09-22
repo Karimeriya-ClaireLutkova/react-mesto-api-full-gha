@@ -1,0 +1,14 @@
+.popup__container_type_notification {
+  padding: 28px 36px 60px;
+  width: 430px;
+  height: 330px;
+}
+
+@media (max-width: 800px) {
+  .popup__container_type_notification {
+    width: 280px;
+    height: 308px;
+    padding: 30px 18px 50px;;
+    order: 2;
+  }
+}

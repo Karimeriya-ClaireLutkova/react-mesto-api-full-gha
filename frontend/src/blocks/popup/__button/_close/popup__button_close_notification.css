@@ -1,0 +1,11 @@
+.popup__button_close_notification {
+  transform: translate(76px, -67px);
+}
+
+@media (max-width: 800px) {
+  .popup__button_close_notification {
+    width: 20px;
+    height: 20px;
+    transform: translate(18px, -66px);
+  }
+}

@@ -1,0 +1,22 @@
+.profile__button_edit-photo {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  background-image: url("../../../../images/edite-button.svg");
+  top: 0;
+  left: 0;
+  background-size: 26px;
+  background-color: rgba(0, 0, 0, .8);
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 47px;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.profile__button_edit-photo:hover {
+  opacity: 1;
+}

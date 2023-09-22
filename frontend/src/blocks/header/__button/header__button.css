@@ -1,0 +1,26 @@
+.header__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 22px;
+  font-size: 18px;
+  line-height: 1.22;
+  font-weight: 400;
+  background-color: black;
+  color: #FFF;
+  border: none;
+  margin: 6px 0 6px;
+  padding: 0;
+}
+
+.header__button:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 800px) {
+  .header__button {
+    max-width: 150px;
+    height: 17px;
+    margin: 0 auto 40px;
+  }
+}

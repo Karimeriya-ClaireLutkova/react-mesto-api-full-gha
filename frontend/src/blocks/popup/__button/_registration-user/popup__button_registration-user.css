@@ -1,0 +1,13 @@
+.popup__button_registration-user {
+  background-color: #FFF;
+  border-radius: 2px;
+  color:black;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+  transform: translate(0, -84px);
+}
+
+.popup__button_registration-user:hover {
+  opacity: 0.85;
+}

@@ -1,0 +1,15 @@
+.element__button_delete {
+  width: 18px;
+  height: 19px;
+  background-color: rgba(255, 255, 255, 0);
+  background-image: url("../../../../images/Delete_backet.svg");
+  background-size: 18px;
+  background-position: 50% 50%;
+  transform: translate(116px, -323px);
+  visibility: hidden;
+  order: 3;
+}
+
+.element__button_delete:hover {
+  opacity: 0.6;
+}

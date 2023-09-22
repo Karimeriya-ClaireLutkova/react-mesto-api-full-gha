@@ -1,0 +1,11 @@
+.popup__image_notification {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 32px;
+}
+
+@media (max-width: 800px) {
+  .popup__image_notification {
+    margin: 0 auto 40px;
+  }
+}

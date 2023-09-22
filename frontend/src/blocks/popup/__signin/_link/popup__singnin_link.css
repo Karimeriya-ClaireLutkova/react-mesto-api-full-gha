@@ -1,0 +1,11 @@
+.popup__signin_link {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.popup__signin_link:hover {
+  opacity: 0.6;
+}

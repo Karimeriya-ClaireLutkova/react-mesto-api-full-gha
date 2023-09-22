@@ -1,0 +1,13 @@
+.footer {
+  max-width: calc(100% - 2*200px);
+  margin: 0 200px;
+}
+
+@media (max-width: 980px) {
+  .footer {
+    margin: 0 auto;
+    max-width: 320px;
+    padding: 0 19px;
+    box-sizing: border-box;
+  }
+}

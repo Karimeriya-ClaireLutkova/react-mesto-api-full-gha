@@ -1,0 +1,25 @@
+.popup__button_accept {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 358px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 1.22;
+  font-weight: 400;
+  border-radius: 2px;
+  margin: 0;
+}
+
+.popup__button_accept:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 800px) {
+  .popup__button_accept {
+    width: 238px;
+    height: 46px;
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}

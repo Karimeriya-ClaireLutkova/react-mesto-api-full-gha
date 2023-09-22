@@ -1,0 +1,16 @@
+.popup__title_login-user {
+  width: 358px;
+  font-size: 24px;
+  text-align:center;
+  color: #FFF;
+  margin: 0 auto 50px;
+}
+
+@media (max-width: 800px) {
+  .popup__title_login-user {
+    width: 260px;
+    font-size: 20px;
+    line-height: 1.22;
+    margin: 0 0 50px;
+  }
+}

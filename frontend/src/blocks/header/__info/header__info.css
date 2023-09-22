@@ -1,0 +1,11 @@
+.header__info {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 800px) {
+  .header__info {
+   flex-direction: column;
+   margin-right: 30px;
+  }
+}

@@ -1,0 +1,12 @@
+.header__info_login-active {
+  order: 1;
+}
+
+@media (max-width: 800px) {
+  .header__info_login-active {
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    order: -1;
+    margin-right: 30px;
+    margin-bottom: 33px;
+  }
+}

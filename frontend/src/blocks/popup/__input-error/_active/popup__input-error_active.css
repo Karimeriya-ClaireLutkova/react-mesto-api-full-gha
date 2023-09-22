@@ -1,0 +1,5 @@
+.popup__input-error_active {
+  display: inline-block;
+  min-height: 30px;
+  opacity: 1;
+}

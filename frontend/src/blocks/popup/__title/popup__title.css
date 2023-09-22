@@ -1,0 +1,22 @@
+.popup__title {
+  width: 330px;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0 28px 50px 0px;
+  padding: 0;
+  z-index: 1;
+  color: #000;
+  box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .popup__title {
+    width: 238px;
+    font-size: 18px;
+    line-height: 1.22;
+    margin: 0 0 75px;
+  }
+}
