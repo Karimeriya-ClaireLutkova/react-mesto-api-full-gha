@@ -46,7 +46,7 @@ function App() {
       }
     };
     tokenCheck();
-    Promise.all([api.getUserInfo(localStorage.jwt), api.getInitialCards(localStorage.jwt)])
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([user, cards]) => {
       setCurrentUser(user);
       setCards(cards);
@@ -59,10 +59,9 @@ function App() {
   function handleLoginSubmit(userEmail, password) {
     authorization(userEmail, password)
       .then((data) => {
-        console.log(data, data.jwt);
-        if (data.jwt) {
-          localStorage.setItem('jwt', data.jwt);
-          getContent(data.jwt).then((res) => {
+        if (data.token) {
+          localStorage.setItem('jwt', data.token);
+          getContent(data.token).then((res) => {
             const data = res.data;
             setUserData({_id: data._id, email: data.email});
             setLoggedIn(true);
@@ -78,7 +77,7 @@ function App() {
 
   function handleRegisterSubmit(userEmail, password) {
     register(userEmail, password)
-      .then((data) => {
+      .then(() => {
         setRegistrationInfo({infoStatus: true, message:"Вы успешно зарегистрировались!"});
       })
       .catch(() => {
