@@ -2,25 +2,26 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { login, createUser } = require('./controllers/users');
+const corsRules = require('./middlewares/corsRules');
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
 const app = express();
 const DATABASE_URL = 'mongodb://127.0.0.1:27017/mestodb';
-
 mongoose.connect(DATABASE_URL, {
   useNewUrlParser: true,
 });
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(requestLogger);
-
+app.use(corsRules());
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
