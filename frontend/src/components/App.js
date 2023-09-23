@@ -46,7 +46,7 @@ function App() {
       }
     };
     tokenCheck();
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
+    Promise.all([api.getUserInfo(localStorage.jwt), api.getInitialCards(localStorage.jwt)])
     .then(([user, cards]) => {
       setCurrentUser(user);
       setCards(cards);
@@ -77,7 +77,7 @@ function App() {
 
   function handleRegisterSubmit(userEmail, password) {
     register(userEmail, password)
-      .then(() => {
+      .then((data) => {
         setRegistrationInfo({infoStatus: true, message:"Вы успешно зарегистрировались!"});
       })
       .catch(() => {
