@@ -4,12 +4,12 @@ class Api {
     this._headers = options.headers;
   }
 
-  getInitialCards(token) {
+  getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {headers: this._headers, credentials: "include"})
       .then((res) => this._checkResponseRequest(res))
   }
 
-  getUserInfo(token) {
+  getUserInfo() {
     return fetch(`${this._baseUrl}users/me`, {headers: this._headers, credentials: "include"})
     .then((res) => this._checkResponseRequest(res))
   }
@@ -94,11 +94,11 @@ class Api {
     }
   }
 }
-const token = localStorage.getItem('jwt');
+
 const api = new Api({
   baseUrl: 'https://api.pract.mesto.students.nomoredomainsrocks.ru/',
   headers: {
-    authorization: `Bearer ${token}`,
+    authorization: localStorage.getItem('jwt'),
     'Content-Type': 'application/json'
   }
 });
