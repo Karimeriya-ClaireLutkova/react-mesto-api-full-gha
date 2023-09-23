@@ -12,14 +12,16 @@ const { login, createUser } = require('./controllers/users');
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
+const app = express();
 const DATABASE_URL = 'mongodb://127.0.0.1:27017/mestodb';
 mongoose.connect(DATABASE_URL, {
   useNewUrlParser: true,
 });
-const app = express();
+
 app.use(cors({
   origin: ['https://practical.mesto.students.nomoredomainsrocks.ru',
-    'http://practical.mesto.students.nomoredomainsrocks.ru'],
+    'http://practical.mesto.students.nomoredomainsrocks.ru',
+  ],
   credentials: true,
 }));
 app.use(bodyParser.json());
