@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');
