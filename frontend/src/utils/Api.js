@@ -86,7 +86,6 @@ class Api {
   }
 
   _checkResponseRequest(res) {
-    console.log(res);
     if (res.ok) {
       return res.json();
     } else {

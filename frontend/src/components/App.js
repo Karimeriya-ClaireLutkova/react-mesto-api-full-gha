@@ -59,9 +59,10 @@ function App() {
   function handleLoginSubmit(userEmail, password) {
     authorization(userEmail, password)
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem('jwt', data.token);
-          getContent(data.token).then((res) => {
+        console.log(data, data.jwt);
+        if (data.jwt) {
+          localStorage.setItem('jwt', data.jwt);
+          getContent(data.jwt).then((res) => {
             const data = res.data;
             setUserData({_id: data._id, email: data.email});
             setLoggedIn(true);
