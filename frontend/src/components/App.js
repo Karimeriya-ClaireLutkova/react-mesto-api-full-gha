@@ -50,6 +50,7 @@ function App() {
     if (loggedIn) {
       Promise.all([api.getUserInfo(jwt), api.getInitialCards(jwt)])
         .then(([user, cards]) => {
+          if ([user,])
           setCurrentUser(user);
           setCards(cards);
         })
@@ -57,7 +58,7 @@ function App() {
           console.log(err)
         });
     }
-  }, [navigate, loggedIn]);
+  }, [navigate, loggedIn, jwt]);
 
   function handleLoginSubmit(userEmail, password) {
     authorization(userEmail, password)
@@ -207,7 +208,8 @@ function App() {
                           onAddPlace={handleAddPlaceClick}
                           onEditAvatar={handleEditAvatarClick}
                           isCardClick={handleCardClick}
-                          onCardLike={handleCardLike} cards={cards}
+                          onCardLike={handleCardLike} 
+                          cards={cards}
                           onCardDelete={handleCardDelete}
                           onAuthorization={signOut}
                           title="Выйти"
