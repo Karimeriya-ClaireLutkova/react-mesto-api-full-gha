@@ -155,7 +155,7 @@ function App() {
   function handleCardClick(item) {
     setSelectedCard({...selectedCard, link: item.link, name: item.name});
   }
-
+  
   function closeAllPopups() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
