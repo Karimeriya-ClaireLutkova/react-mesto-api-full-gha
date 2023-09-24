@@ -26,6 +26,7 @@ function App() {
   const [isRegisterPopupOpen, setRegisterPopupOpen] = React.useState(true);
   const [isLoginPopupOpen, setLoginPopupOpen] = React.useState(true);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
+  const jwt = localStorage.getItem('jwt');
 
   React.useEffect(() => {
     const tokenCheck = () => {
@@ -46,14 +47,16 @@ function App() {
       }
     };
     tokenCheck();
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([user, cards]) => {
-        setCurrentUser(user);
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(err)
-      });
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(jwt), api.getInitialCards(jwt)])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+    }
   }, [navigate, loggedIn]);
 
   function handleLoginSubmit(userEmail, password) {
@@ -68,8 +71,10 @@ function App() {
 
   function handleRegisterSubmit(userEmail, password) {
     register(userEmail, password)
-      .then(() => {
-        setRegistrationInfo({infoStatus: true, message:"Вы успешно зарегистрировались!"});
+      .then((data) => {
+        if (data) {
+          setRegistrationInfo({infoStatus: true, message:"Вы успешно зарегистрировались!"});
+        }
       })
       .catch(() => {
         setRegistrationInfo({infoStatus: false, message:"Что-то пошло не так! Попробуйте ещё раз."});
@@ -80,7 +85,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(item) {
-    api.addCardNew(item)
+    api.addCardNew(item, jwt)
       .then((result) => {
         setCards([result, ...cards]);
         closeAllPopups();
@@ -93,7 +98,7 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
-    api.changeLike(card._id, isLiked)
+    api.changeLike(card._id, isLiked, jwt)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -103,7 +108,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id)
+    api.deleteCard(card._id, jwt)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
       })
@@ -113,7 +118,7 @@ function App() {
   }
 
   function handleUpdateUser(item) {
-    api.editProfileInfo(item.name, item.about)
+    api.editProfileInfo(item.name, item.about, jwt)
       .then((result) => {
         setCurrentUser(result);
         closeAllPopups();
@@ -124,7 +129,7 @@ function App() {
   }
 
   function handleUpdateAvatar(item) {
-    api.editProfileAvatar(item)
+    api.editProfileAvatar(item, jwt)
       .then((result) => {
         setCurrentUser(result);
         closeAllPopups();

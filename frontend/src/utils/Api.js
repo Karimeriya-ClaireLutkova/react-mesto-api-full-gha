@@ -4,20 +4,29 @@ class Api {
     this._headers = options.headers;
   }
 
-  getInitialCards() {
-    return fetch(`${this._baseUrl}cards`, {headers: this._headers})
+  getInitialCards(jwt) {
+    return fetch(`${this._baseUrl}cards`, {headers: {
+      ...this._headers,
+      'authorization': `Bearer ${jwt}`,
+    }})
       .then((res) => this._checkResponseRequest(res))
   }
 
-  getUserInfo() {
-    return fetch(`${this._baseUrl}users/me`, {headers: this._headers})
+  getUserInfo(jwt) {
+    return fetch(`${this._baseUrl}users/me`, {headers: {
+      ...this._headers,
+      'authorization': `Bearer ${jwt}`,
+    }})
     .then((res) => this._checkResponseRequest(res))
   }
 
-  editProfileInfo(name, about) {
+  editProfileInfo(name, about, jwt) {
     return fetch(`${this._baseUrl}users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${jwt}`,
+      },
       body: JSON.stringify({
         name, about}),
     })
@@ -27,9 +36,13 @@ class Api {
   editProfileAvatar(item) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${item.jwt}`,
+      },
       body: JSON.stringify({
         avatar: item.avatar,
+        
       }),
     })
     .then((res) => this._checkResponseRequest(res))
@@ -38,7 +51,10 @@ class Api {
   addCardNew(item) {
     return fetch(`${this._baseUrl}cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${item.jwt}`,
+      },
       body: JSON.stringify({
         name: item.name,
         link: item.link,
@@ -50,7 +66,10 @@ class Api {
   addLike(item) {
     return fetch(`${this._baseUrl}cards/likes/${item}`, {
       method: "PUT",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${item.jwt}`,
+      }
     })
     .then((res) => this._checkResponseRequest(res))
   }
@@ -58,7 +77,10 @@ class Api {
   deleteLike(item) {
     return fetch(`${this._baseUrl}cards/likes/${item}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${item.jwt}`,
+      }
     })
     .then((res) => this._checkResponseRequest(res))
   }
@@ -66,7 +88,10 @@ class Api {
   deleteCard(item) {
     return fetch(`${this._baseUrl}cards/${item}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${item.jwt}`,
+      }
     })
     .then((res) => this._checkResponseRequest(res))
   }
@@ -91,7 +116,6 @@ class Api {
 const api = new Api({
   baseUrl: 'https://api.pract.mesto.students.nomoredomainsrocks.ru/',
   headers: {
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 });
