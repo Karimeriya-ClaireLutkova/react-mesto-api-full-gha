@@ -42,25 +42,19 @@ function App() {
             .catch((err) => {
               console.log(err);
             })
-        };
+        }
       }
     };
     tokenCheck();
-  }, [navigate]);
-
-  React.useEffect(() => {
-    if (loggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
-        .then(([user, cards]) => {
-          if ([user,])
-          setCurrentUser(user);
-          setCards(cards);
-        })
-        .catch((err) => {
-          console.log(err)
-        });
-    }
-  }, [loggedIn]);  
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+    .then(([user, cards]) => {
+      setCurrentUser(user);
+      setCards(cards);
+    })
+    .catch((err) => {
+      console.log(err)
+    });  
+  }, [navigate, loggedIn]); 
 
   function handleLoginSubmit(userEmail, password) {
     authorization(userEmail, password)
