@@ -18,7 +18,10 @@ mongoose.connect(DATABASE_URL, {
   useNewUrlParser: true,
 });
 
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: ['https://practical.mesto.students.nomoredomainsrocks.ru'],
+}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(requestLogger);

@@ -46,9 +46,7 @@ function App() {
       }
     };
     tokenCheck();
-    if (loggedIn) {
-      setLoggedIn(true);
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([user, cards]) => {
         setCurrentUser(user);
         setCards(cards);
@@ -56,7 +54,6 @@ function App() {
       .catch((err) => {
         console.log(err)
       });
-    }  
   }, [navigate, loggedIn]);
 
   function handleLoginSubmit(userEmail, password) {
