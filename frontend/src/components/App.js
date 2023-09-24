@@ -26,7 +26,6 @@ function App() {
   const [isRegisterPopupOpen, setRegisterPopupOpen] = React.useState(true);
   const [isLoginPopupOpen, setLoginPopupOpen] = React.useState(true);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
-  const jwt = localStorage.getItem('jwt');
 
   React.useEffect(() => {
     const tokenCheck = () => {
@@ -43,12 +42,15 @@ function App() {
             .catch((err) => {
               console.log(err);
             })
-        }
+        };
       }
     };
     tokenCheck();
+  }, [navigate]);
+
+  React.useEffect(() => {
     if (loggedIn) {
-      Promise.all([api.getUserInfo(jwt), api.getInitialCards(jwt)])
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
         .then(([user, cards]) => {
           if ([user,])
           setCurrentUser(user);
@@ -58,7 +60,7 @@ function App() {
           console.log(err)
         });
     }
-  }, [navigate, loggedIn, jwt]);
+  }, [loggedIn]);  
 
   function handleLoginSubmit(userEmail, password) {
     authorization(userEmail, password)
@@ -86,7 +88,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(item) {
-    api.addCardNew(item, jwt)
+    api.addCardNew(item)
       .then((result) => {
         setCards([result, ...cards]);
         closeAllPopups();
@@ -99,7 +101,7 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
-    api.changeLike(card._id, isLiked, jwt)
+    api.changeLike(card._id, isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -109,7 +111,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id, jwt)
+    api.deleteCard(card._id)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
       })
@@ -119,7 +121,7 @@ function App() {
   }
 
   function handleUpdateUser(item) {
-    api.editProfileInfo(item.name, item.about, jwt)
+    api.editProfileInfo(item.name, item.about)
       .then((result) => {
         setCurrentUser(result);
         closeAllPopups();
@@ -130,7 +132,7 @@ function App() {
   }
 
   function handleUpdateAvatar(item) {
-    api.editProfileAvatar(item, jwt)
+    api.editProfileAvatar(item)
       .then((result) => {
         setCurrentUser(result);
         closeAllPopups();

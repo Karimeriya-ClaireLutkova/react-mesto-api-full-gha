@@ -4,28 +4,28 @@ class Api {
     this._headers = options.headers;
   }
 
-  getInitialCards(jwt) {
+  getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {headers: {
       ...this._headers,
-      'authorization': `Bearer ${jwt}`,
+      'authorization': `Bearer ${localStorage.getItem('jwt')}`,
     }})
       .then((res) => this._checkResponseRequest(res))
   }
 
-  getUserInfo(jwt) {
+  getUserInfo() {
     return fetch(`${this._baseUrl}users/me`, {headers: {
       ...this._headers,
-      'authorization': `Bearer ${jwt}`,
+      'authorization': `Bearer ${localStorage.getItem('jwt')}`,
     }})
     .then((res) => this._checkResponseRequest(res))
   }
 
-  editProfileInfo(name, about, jwt) {
+  editProfileInfo(name, about) {
     return fetch(`${this._baseUrl}users/me`, {
       method: "PATCH",
       headers: {
         ...this._headers,
-        'authorization': `Bearer ${jwt}`,
+        'authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
       body: JSON.stringify({
         name, about}),
@@ -38,7 +38,7 @@ class Api {
       method: "PATCH",
       headers: {
         ...this._headers,
-        'authorization': `Bearer ${item.jwt}`,
+        'authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
       body: JSON.stringify({
         avatar: item.avatar,
@@ -53,7 +53,7 @@ class Api {
       method: "POST",
       headers: {
         ...this._headers,
-        'authorization': `Bearer ${item.jwt}`,
+        'authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
       body: JSON.stringify({
         name: item.name,
@@ -68,7 +68,7 @@ class Api {
       method: "PUT",
       headers: {
         ...this._headers,
-        'authorization': `Bearer ${item.jwt}`,
+        'authorization': `Bearer ${localStorage.getItem('jwt')}`,
       }
     })
     .then((res) => this._checkResponseRequest(res))
@@ -79,7 +79,7 @@ class Api {
       method: "DELETE",
       headers: {
         ...this._headers,
-        'authorization': `Bearer ${item.jwt}`,
+        'authorization': `Bearer ${localStorage.getItem('jwt')}`,
       }
     })
     .then((res) => this._checkResponseRequest(res))
@@ -90,7 +90,7 @@ class Api {
       method: "DELETE",
       headers: {
         ...this._headers,
-        'authorization': `Bearer ${item.jwt}`,
+        'authorization': `Bearer ${localStorage.getItem('jwt')}`,
       }
     })
     .then((res) => this._checkResponseRequest(res))
