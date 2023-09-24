@@ -59,6 +59,7 @@ function App() {
   function handleLoginSubmit(userEmail, password) {
     authorization(userEmail, password)
       .then((data) => {
+        console.log(data);
         if (data.token) {
           localStorage.setItem('jwt', data.token);
           getContent(data.token).then((res) => {
