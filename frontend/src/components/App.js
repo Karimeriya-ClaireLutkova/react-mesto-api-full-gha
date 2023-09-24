@@ -59,19 +59,9 @@ function App() {
   function handleLoginSubmit(userEmail, password) {
     authorization(userEmail, password)
       .then((data) => {
-        console.log(data);
-        if (data.token) {
-          localStorage.setItem('jwt', data.token);
-          getContent(data.token).then((res) => {
-            const data = res.data;
-            setUserData({_id: data._id, email: data.email});
-            setLoggedIn(true);
-            navigate('/', { replace: true });
-          })
-            .catch((err) => {
-              console.log(err);
-            })
-        }
+        localStorage.setItem('jwt', data.token);
+        setLoggedIn(true);
+        navigate('/', { replace: true });
       })
       .catch(err => console.log(err));
   }
