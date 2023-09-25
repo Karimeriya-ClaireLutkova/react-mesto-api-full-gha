@@ -9,6 +9,7 @@ const routerCards = require('./routes/cards');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { login, createUser } = require('./controllers/users');
+const NotFoundError = require('./errors/NotFoundError');
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
@@ -48,8 +49,8 @@ app.post('/signup', celebrate({
 app.use(auth);
 app.use(routerUsers);
 app.use(routerCards);
-app.use('*', (req, res) => {
-  res.status(404).send({ message: 'Ресурс не найден' });
+app.use('*', (req, res, next) => {
+  next(new NotFoundError('Ресурс не найден.'));
 });
 app.use(errorLogger);
 app.use(errors());
