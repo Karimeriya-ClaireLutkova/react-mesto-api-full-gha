@@ -33,7 +33,7 @@ class Api {
     .then((res) => this._checkResponseRequest(res))
   }
 
-  editProfileAvatar(item) {
+  editProfileAvatar(avatar) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: "PATCH",
       headers: {
@@ -41,7 +41,7 @@ class Api {
         'authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
       body: JSON.stringify({
-        avatar: item.avatar,        
+        avatar        
       }),
     })
     .then((res) => this._checkResponseRequest(res))

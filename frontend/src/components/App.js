@@ -34,7 +34,9 @@ function App() {
         if (jwt) { 
           getContent(jwt)
             .then((res) => {
-              setUserData({_id: res._id, email: res.email});
+              const { _id, email } = res;
+              const data = {_id, email};
+              setUserData(data);
               setLoggedIn(true);
               navigate('/', { replace: true });
             })
@@ -130,7 +132,7 @@ function App() {
   }
 
   function handleUpdateAvatar(item) {
-    api.editProfileAvatar(item)
+    api.editProfileAvatar(item.avatar)
       .then((result) => {
         setCurrentUser(result);
         closeAllPopups();
