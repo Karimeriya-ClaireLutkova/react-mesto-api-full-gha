@@ -100,7 +100,7 @@ module.exports.updateUser = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Запрашиваемый пользователь не найден.');
       }
-      return res.send({ data: user });
+      return res.send({ user });
     })
     .catch((err) => {
       if (err.name === 'Validation Error') {
