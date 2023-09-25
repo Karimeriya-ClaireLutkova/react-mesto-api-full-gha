@@ -18,7 +18,7 @@ module.exports.createCard = (req, res, next) => {
 };
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({ cards }))
+    .then((cards) => res.send(cards))
     .catch((err) => next(err));
 };
 module.exports.deleteCard = (req, res, next) => {
@@ -58,7 +58,7 @@ module.exports.likeCard = (req, res, next) => {
       if (card === null) {
         throw new NotFoundError('Передан несуществующий _id карточки.');
       }
-      return res.send({ data: card });
+      return res.send({ card });
     })
     .catch((err) => {
       if (err.name === 'Not Found Error') {
@@ -82,7 +82,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (card === null) {
         throw new NotFoundError('Передан несуществующий _id карточки.');
       }
-      return res.send({ data: card });
+      return res.send({ card });
     })
     .catch((err) => {
       if (err.name === 'Not Found Error') {
