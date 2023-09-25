@@ -29,18 +29,12 @@ module.exports.deleteCard = (req, res, next) => {
         throw new NotFoundError('Запрашиваемая карточка не найдена.');
       }
       if (card.owner.toString() !== owner) {
-        next(new ForbiddenError('Нет прав на удаление карточки.'));
+        return next(new ForbiddenError('Нет прав на удаление карточки.'));
       }
       return Card.findByIdAndRemove(req.params.cardId);
     })
     .then((deletedCard) => res.send(deletedCard))
     .catch((err) => {
-      if (err.name === 'Not Found Error') {
-        next(new NotFoundError('Запрашиваемая карточка не найдена.'));
-      }
-      if (err.name === 'ForbiddenError') {
-        next(new ForbiddenError('Нет прав на удаление карточки.'));
-      }
       if ((err.name === 'ValidationError') || (err.name === 'CastError')) {
         next(new ValidationError('Переданы некорректные данные при удалении карточки.'));
       } else {
@@ -61,9 +55,6 @@ module.exports.likeCard = (req, res, next) => {
       return res.send(card);
     })
     .catch((err) => {
-      if (err.name === 'Not Found Error') {
-        next(new NotFoundError('Передан несуществующий _id карточки.'));
-      }
       if ((err.name === 'ValidationError') || (err.name === 'CastError')) {
         next(new ValidationError('Переданы некорректные данные для постановки/снятии лайка.'));
       } else {
@@ -84,9 +75,6 @@ module.exports.dislikeCard = (req, res, next) => {
       return res.send(card);
     })
     .catch((err) => {
-      if (err.name === 'Not Found Error') {
-        next(new NotFoundError('Передан несуществующий _id карточки.'));
-      }
       if ((err.name === 'ValidationError') || (err.name === 'CastError')) {
         next(new ValidationError('Переданы некорректные данные для постановки/снятии лайка.'));
       } else {
