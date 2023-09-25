@@ -46,16 +46,14 @@ function App() {
       }
     };
     tokenCheck();
-    if (loggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
-        .then(([user, cards]) => {
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then(([user, cards]) => {
         setCurrentUser(user);
         setCards(cards);
       })
       .catch((err) => {
         console.log(err)
-      });
-    }
+    });  
   }, [navigate, loggedIn]); 
 
   function handleLoginSubmit(userEmail, password) {
