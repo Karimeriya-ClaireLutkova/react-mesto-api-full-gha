@@ -44,16 +44,21 @@ function App() {
         }
       }
     };
-    tokenCheck();
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([user, cards]) => {
-        setCurrentUser(user);
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(err)
-    });  
-  }, [navigate, loggedIn]); 
+    tokenCheck();    
+  }, [navigate]); 
+
+  React.useEffect(() => {
+    if (loggedIn) { 
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+    }
+  }, [loggedIn]);
 
   function handleLoginSubmit(userEmail, password) {
     authorization(userEmail, password)
