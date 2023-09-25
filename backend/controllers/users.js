@@ -63,7 +63,7 @@ module.exports.getUser = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Запрашиваемый пользователь не найден.');
       }
-      return res.status(200).send({ user });
+      return res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'Not Found Error') {
