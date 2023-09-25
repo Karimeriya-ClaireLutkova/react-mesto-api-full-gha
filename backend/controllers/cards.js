@@ -71,7 +71,6 @@ module.exports.likeCard = (req, res, next) => {
       }
     });
 };
-
 module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.cardId,
