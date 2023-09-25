@@ -82,7 +82,7 @@ module.exports.getUserСurrent = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Запрашиваемый пользователь не найден.');
       }
-      return res.send(user);
+      return res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
