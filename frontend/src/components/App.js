@@ -34,8 +34,7 @@ function App() {
         if (jwt) { 
           getContent(jwt)
             .then((res) => {
-              const data = res.data;
-              setUserData({_id: data._id, email: data.email});
+              setUserData({_id: res._id, email: res.email});
               setLoggedIn(true);
               navigate('/', { replace: true });
             })
