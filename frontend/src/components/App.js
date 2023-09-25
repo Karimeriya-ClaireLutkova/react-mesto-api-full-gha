@@ -34,9 +34,8 @@ function App() {
         if (jwt) { 
           getContent(jwt)
             .then((res) => {
-              const { _id, email } = res;
-              const data = {_id, email};
-              setUserData(data);
+              const data = res.data;
+              setUserData({_id: data._id, email: data.email});
               setLoggedIn(true);
               navigate('/', { replace: true });
             })
@@ -46,21 +45,16 @@ function App() {
         }
       }
     };
-    tokenCheck();    
-  }, [navigate]); 
-
-  React.useEffect(() => {
-    if (loggedIn) { 
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
-        .then(([user, cards]) => {
-          setCurrentUser(user);
-          setCards(cards);
-        })
-        .catch((err) => {
-          console.log(err)
-        });
-    }
-  }, [loggedIn]);
+    tokenCheck();
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+    .then(([user, cards]) => {
+      setCurrentUser(user);
+      setCards(cards);
+    })
+    .catch((err) => {
+      console.log(err)
+    });  
+  }, [navigate, loggedIn]); 
 
   function handleLoginSubmit(userEmail, password) {
     authorization(userEmail, password)
@@ -132,7 +126,7 @@ function App() {
   }
 
   function handleUpdateAvatar(item) {
-    api.editProfileAvatar(item.avatar)
+    api.editProfileAvatar(item)
       .then((result) => {
         setCurrentUser(result);
         closeAllPopups();

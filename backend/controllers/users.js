@@ -58,8 +58,7 @@ module.exports.getUsers = (req, res, next) => {
     .catch((err) => next(err));
 };
 module.exports.getUser = (req, res, next) => {
-  const { id } = req.params;
-  User.findById(id)
+  User.findById(req.params.userId)
     .then((user) => {
       if (user === null) {
         throw new NotFoundError('Запрашиваемый пользователь не найден.');
@@ -78,8 +77,7 @@ module.exports.getUser = (req, res, next) => {
     });
 };
 module.exports.getUserСurrent = (req, res, next) => {
-  const { userId } = req.user;
-  User.findById(userId)
+  User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Запрашиваемый пользователь не найден.');
@@ -95,14 +93,14 @@ module.exports.getUserСurrent = (req, res, next) => {
     });
 };
 module.exports.updateUser = (req, res, next) => {
+  const userId = req.user._id;
   const { name, about } = req.body;
-  const { userId } = req.user;
   User.findByIdAndUpdate(userId, { name, about }, { new: true, runValidators: true })
     .then((user) => {
       if (user === null) {
         throw new NotFoundError('Запрашиваемый пользователь не найден.');
       }
-      return res.send(user);
+      return res.send({ user });
     })
     .catch((err) => {
       if (err.name === 'Validation Error') {
@@ -116,14 +114,14 @@ module.exports.updateUser = (req, res, next) => {
     });
 };
 module.exports.updateAvatar = (req, res, next) => {
+  const userId = req.user._id;
   const { avatar } = req.body;
-  const { userId } = req.user;
   User.findByIdAndUpdate(userId, { avatar }, { new: true, runValidators: true })
     .then((user) => {
       if (user === null) {
         throw new NotFoundError('Запрашиваемый пользователь не найден.');
       }
-      return res.send(user);
+      return res.send({ user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
