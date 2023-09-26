@@ -4,7 +4,6 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
 const ValidationError = require('../errors/ValidationError');
-const UnauthorizedError = require('../errors/UnauthorizedError');
 const { NODE_ENV, JWT_SECRET } = require('../utils/constants');
 
 module.exports.createUser = (req, res, next) => {
@@ -42,13 +41,10 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((data) => {
-      if (data) {
-        const user = data;
-        user.password = undefined;
-        const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-        res.send({ token });
-      }
-      throw new UnauthorizedError('Передан неверный логин или пароль.');
+      const user = data;
+      user.password = undefined;
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      res.send({ token });
     })
     .catch(next);
 };
