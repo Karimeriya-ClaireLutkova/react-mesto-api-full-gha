@@ -41,7 +41,7 @@ class Api {
         'authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
       body: JSON.stringify({
-        avatar: item.avatar,        
+        avatar: item.avatar,
       }),
     })
     .then((res) => this._checkResponseRequest(res))

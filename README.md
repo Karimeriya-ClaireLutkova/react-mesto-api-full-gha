@@ -50,9 +50,7 @@ Alt - H1
 
 Адрес репозитория: https://github.com/Karimeriya-ClaireLutkova/react-mesto-api-full-gha
 
-## Ссылки на проект
-
-IP 158.160.106.80
+## Ссылки на проект - Работа сайта приостановлена, но есть возможность возобновить для демонстрации.
 
 Frontend https://practical.mesto.students.nomoredomainsrocks.ru
 
